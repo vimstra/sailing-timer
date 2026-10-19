@@ -25,14 +25,16 @@ npm run dev
 
 Albo bez Node: `python3 -m http.server 8787 --directory public`.
 
-## Wdrożenie na Cloudflare Pages
+## Wdrożenie na Cloudflare (Workers, statyczne pliki)
+
+Repo jest podpięte w Cloudflare (Workers & Pages → Worker połączony z GitHubem). Każdy push na `main` uruchamia `npx wrangler deploy`, który wgrywa katalog `public/` (sekcja `[assets]` w `wrangler.toml`). Nazwa Workera w panelu musi być taka sama jak `name` w `wrangler.toml`.
+
+Ręcznie z konsoli:
 
 ```bash
 npx wrangler login
 npm run deploy
 ```
-
-Przy pierwszym `deploy` wrangler utworzy projekt `sailing-timer` (nazwa z `wrangler.toml`). Można też podpiąć repo w panelu Cloudflare Pages: build command pusty, output directory `public`.
 
 Po każdej zmianie plików podbij `CACHE` w `public/sw.js`, żeby zainstalowane aplikacje pobrały nową wersję.
 
